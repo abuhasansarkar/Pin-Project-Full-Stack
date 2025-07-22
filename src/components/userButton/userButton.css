@@ -1,0 +1,73 @@
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.userInfo {
+  position: relative;
+}
+
+.userOptions {
+  position: absolute;
+  top: 40px;
+  list-style: none;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  right: 0;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.userOptions li {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.userOptions li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.userButton img.userImg {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.userButton img.arrow {
+  width: 0.8rem;
+  height: 0.8rem;
+  object-fit: cover;
+}
+
+.userName {
+  text-wrap: nowrap;
+  font-weight: 700;
+}
+
+.loginButton {
+  padding: 0.6rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: #000;
+  transition: ease-in-out 0.3s;
+  font-weight: 600;
+}
+.loginButton:hover {
+  background-color: #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  .userName {
+    display: none;
+  }
+}

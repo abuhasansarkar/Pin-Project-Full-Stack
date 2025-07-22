@@ -1,0 +1,44 @@
+.postInteraction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.interaction {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.interaction img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.interaction button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.saveButton {
+  background-color: #e50829;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: #c40724;
+}

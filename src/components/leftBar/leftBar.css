@@ -1,0 +1,40 @@
+.leftBar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 70px;
+  padding: 16px;
+  border-right: 1px solid #e9e9e9;
+  z-index: 999;
+}
+.menuIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftBar img.logo {
+  width: 30px;
+  height: 30px;
+}
+.leftBar img {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 780px) {
+  .leftBar {
+    width: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .leftBar {
+    width: 45px;
+  }
+}

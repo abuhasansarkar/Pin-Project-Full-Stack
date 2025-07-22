@@ -1,0 +1,34 @@
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1000;
+}
+
+.searchBar {
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 16px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.searchBar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .topBar {
+    padding: 16px 10px;
+  }
+}

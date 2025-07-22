@@ -1,0 +1,5 @@
+@media (max-width: 500px) {
+  aside.epr-main.EmojiPickerReact {
+    max-width: 300px;
+  }
+}

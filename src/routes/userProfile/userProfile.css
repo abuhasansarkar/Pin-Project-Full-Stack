@@ -1,0 +1,74 @@
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.profileImage {
+  object-fit: cover;
+  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.profileBio {
+  text-align: center;
+}
+
+.interactionButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.messageButton {
+  background-color: #3333333a;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.followButton {
+  background-color: rgb(245, 6, 6);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.followButton:hover {
+  background-color: rgb(181, 6, 6);
+}
+.interactionIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.profileOptions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-weight: 600;
+  margin-top: 32px;
+}
+
+.profileOptions span {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+.profileOptions span:hover {
+  color: gray;
+}
+
+.activeOption {
+  border-bottom: 2px solid #000;
+}

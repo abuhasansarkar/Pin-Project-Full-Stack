@@ -1,0 +1,84 @@
+.postPage {
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.postContainer {
+  display: flex;
+  margin-top: 16px;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
+  border: 1px solid #00000036;
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 820px;
+}
+
+.postImage {
+  flex: 1;
+}
+.postImage img {
+  width: 100%;
+  height: 100%;
+  max-height: 820px;
+  min-height: 520px;
+  object-fit: cover;
+}
+.postDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+
+.postUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.postUser img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Media */
+@media screen and (max-width: 1024px) {
+  .postContainer {
+    flex-direction: column;
+    width: 80%;
+    max-height: unset;
+  }
+  .postImage img {
+    width: 100%;
+    height: 100%;
+    max-height: 620px;
+    object-fit: cover;
+  }
+}
+@media screen and (max-width: 768px) {
+  .postContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+  .postImage img {
+    width: 100%;
+    height: 100%;
+    max-height: 520px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .postImage img {
+    width: 100%;
+    height: 100%;
+    max-height: 420px;
+    object-fit: cover;
+  }
+}
