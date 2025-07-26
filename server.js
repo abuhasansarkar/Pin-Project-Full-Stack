@@ -13,7 +13,12 @@ const port = process.env.PORT || 8080;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 // User routes
 app.use("/api/users", userRoutes);

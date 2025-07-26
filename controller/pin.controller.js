@@ -1,5 +1,6 @@
 import Pin from "../models/pin.model.js";
 
+// Create Pin
 export const createPin = async (req, res) => {
   const { media, width, height, title, description, link, board, tags, user } =
     req.body;
@@ -23,8 +24,25 @@ export const createPin = async (req, res) => {
 // Get All Pins
 export const getAllPins = async (req, res) => {
   const pageNumber = Number(req.query.cursor) || 0;
+  const search = req.query.search;
+  const userId = req.query.userId;
+  const boardId = req.query.boardId;
+
   const LIMIT = 21;
-  const pins = await Pin.find()
+  const pins = await Pin.find(
+    search
+      ? {
+          $or: [
+            { title: { $regex: search, $options: "i" } },
+            { tags: { $in: [search] } },
+          ],
+        }
+      : userId
+      ? { user: userId }
+      : boardId
+      ? { board: boardId }
+      : {}
+  )
     .limit(LIMIT)
     .skip(pageNumber * LIMIT);
 
@@ -40,7 +58,10 @@ export const getAllPins = async (req, res) => {
 // Get Single Pin
 export const getSinglePin = async (req, res) => {
   const id = req.params.id;
-  const pin = await Pin.findById({ _id: id });
+  const pin = await Pin.findById({ _id: id }).populate(
+    "user",
+    "name username profilePicture "
+  );
 
   res.status(200).json(pin);
 };

@@ -1,8 +1,9 @@
 import express from "express";
-import { test } from "../controller/board.controller.js";
+import { getAllBoards, getBoard } from "../controller/board.controller.js";
 
 const router = express.Router();
 
-router.get("/", test);
+router.get("/", getAllBoards);
+router.get("/:id", getBoard);
 
 export default router;
