@@ -40,7 +40,7 @@ const PostPage = () => {
             {/* User Interaction */}
             <PostInteraction />
             {/* User Info */}
-            <Link to={`/${data?.user.username}`} className="postUser">
+            <Link to={`/profile/${data?.user.username}`} className="postUser">
               <IKImage
                 src={
                   data?.user.profilePicture
@@ -54,7 +54,7 @@ const PostPage = () => {
 
             {/* Comment */}
 
-            <Comment id={data._id} />
+            <Comment pinId={data._id} />
           </div>
         </div>
       </div>

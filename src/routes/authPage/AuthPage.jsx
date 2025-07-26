@@ -3,20 +3,26 @@ import IKImage from "../../components/ikimage/IKImage";
 import "./authPage.css";
 import apiRequest from "../../utils/apiRequest";
 import { useNavigate } from "react-router";
+import useAuthStore from "../../utils/authStore";
 
 const AuthPage = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  const { setCurrentUser } = useAuthStore();
+
   // Register Function
   const handleRegister = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
     try {
       const res = await apiRequest.post("/users/register", data);
+      // Set User in Zustand Store
+      setCurrentUser(res.data);
+      console.log(res.data);
       if (res.data) {
         navigate("/");
       }
@@ -33,6 +39,8 @@ const AuthPage = () => {
     console.log(data);
     try {
       const res = await apiRequest.post("/users/login", data);
+      // Set User in Zustand Store
+      setCurrentUser(res.data);
       console.log(res);
       if (res.data) {
         navigate("/");

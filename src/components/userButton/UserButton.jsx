@@ -1,17 +1,27 @@
 import { useState } from "react";
 import "./userButton.css";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import apiRequest from "../../utils/apiRequest";
+import useAuthStore from "../../utils/authStore";
+import IKImage from "../ikimage/IKImage";
 
 const UserButton = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   // Temp User
-  const currentUser = true; // Replace with actual user check logic
+  // const currentUser = true; // Replace with actual user check logic
+
+  const { currentUser, removeCurrentUser } = useAuthStore();
+
+  console.log(currentUser);
+
   const handleLogOut = async () => {
     try {
       await apiRequest.post("/users/logout", {});
+      removeCurrentUser();
+      setOpen(false);
+      console.log("User logged out");
       navigate("/auth");
     } catch (error) {
       console.log(error);
@@ -23,29 +33,37 @@ const UserButton = () => {
       {currentUser ? (
         <div className="userInfo">
           <div onClick={() => setOpen(!open)} className="userButton">
-            <img
+            <IKImage
               className="userImg"
-              src="/general/noAvatar.png"
+              src={currentUser.profilePicture || "/general/noAvatar.png"}
               alt="User Icon"
             />
-            <span className="userName">Jhon S.</span>
-            <img className="arrow" src="/general/arrow.svg" alt="User Icon" />
+            <span className="userName">{currentUser.name}</span>
+            <IKImage
+              className="arrow"
+              src="/general/arrow.svg"
+              alt="User Icon"
+            />
           </div>
 
           {open && (
             <ul className="userOptions">
-              <li className="">Profile</li>
-              <li className="">Setting</li>
-              <li onClick={handleLogOut} className="">
+              <Link to={`/profile/${currentUser.username}`} className="">
+                Profile
+              </Link>
+              <Link to="/settings" className="">
+                Setting
+              </Link>
+              <Link to="/auth" onClick={handleLogOut} className="">
                 LogOut
-              </li>
+              </Link>
             </ul>
           )}
         </div>
       ) : (
-        <a href="/" className="loginButton">
+        <Link to="/auth" className="loginButton">
           Login/Signup
-        </a>
+        </Link>
       )}
     </div>
   );

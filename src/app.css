@@ -4,6 +4,6 @@
   }
 }
 
-.commentForm input {
+.commentForm .EmojiPickerReact input {
   padding: 4px 32px !important;
 }

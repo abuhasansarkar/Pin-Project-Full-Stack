@@ -7,12 +7,10 @@ import apiRequest from "../../utils/apiRequest";
 import { format } from "timeago.js";
 import CommentForm from "../commentForm/CommentForm";
 
-const Comment = ({ id }) => {
-  console.log("Pin Post Id:" + id);
-
+const Comment = ({ pinId }) => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["comment", id],
-    queryFn: () => apiRequest.get(`/comments/${id}`).then((res) => res.data),
+    queryKey: ["comment", pinId],
+    queryFn: () => apiRequest.get(`/comments/${pinId}`).then((res) => res.data),
   });
 
   if (isPending) return "Loading.........";
@@ -47,7 +45,7 @@ const Comment = ({ id }) => {
       </div>
 
       {/* Comment Input Form */}
-      <CommentForm />
+      <CommentForm pinId={pinId} />
     </div>
   );
 };

@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
-        path: "/:username",
+        path: "/profile/:username",
         element: <UserProfile />,
       },
       {
