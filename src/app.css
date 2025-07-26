@@ -3,3 +3,7 @@
     max-width: 300px;
   }
 }
+
+.commentForm input {
+  padding: 4px 32px !important;
+}

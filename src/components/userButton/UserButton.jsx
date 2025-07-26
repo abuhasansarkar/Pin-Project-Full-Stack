@@ -1,11 +1,22 @@
 import { useState } from "react";
 import "./userButton.css";
+import { useNavigate } from "react-router";
+import apiRequest from "../../utils/apiRequest";
 
 const UserButton = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Temp User
   const currentUser = true; // Replace with actual user check logic
+  const handleLogOut = async () => {
+    try {
+      await apiRequest.post("/users/logout", {});
+      navigate("/auth");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="userButton">
@@ -25,7 +36,9 @@ const UserButton = () => {
             <ul className="userOptions">
               <li className="">Profile</li>
               <li className="">Setting</li>
-              <li className="">LogOut</li>
+              <li onClick={handleLogOut} className="">
+                LogOut
+              </li>
             </ul>
           )}
         </div>

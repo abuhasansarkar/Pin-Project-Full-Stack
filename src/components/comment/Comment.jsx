@@ -1,76 +1,53 @@
-import { useState } from "react";
 import IKImage from "../ikimage/IKImage";
 import "./comment.css";
 
-import EmojiPicker from "emoji-picker-react";
+import { useQuery } from "@tanstack/react-query";
+import apiRequest from "../../utils/apiRequest";
 
-const Comment = () => {
-  const [open, setOpen] = useState(false);
+import { format } from "timeago.js";
+import CommentForm from "../commentForm/CommentForm";
+
+const Comment = ({ id }) => {
+  console.log("Pin Post Id:" + id);
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["comment", id],
+    queryFn: () => apiRequest.get(`/comments/${id}`).then((res) => res.data),
+  });
+
+  if (isPending) return "Loading.........";
+  if (error) return "An Error has occured:" + error.message;
+
+  if (!data) return "No Comments found";
+
+  console.log(data);
+
   return (
     <div className="comments">
       <div className="commentList">
-        <span className="commentCount">5 Comments</span>
+        <span className="commentCount">
+          {data?.length === 0 ? "No Comment" : `${data.length} Comments`}
+        </span>
         {/* Comment */}
-        <div className="comment">
-          <IKImage src="/general/noAvatar.png" alt="userImg" />
-          <div className="commentContent">
-            <p className="commentText">
-              <b className="commentUser">John Doe : </b>
-              This is a sample comment text. It can be quite long, so it should
-              wrap properly within the comment box.
-            </p>
-            <i className="commentDate">2 hour ago</i>
+        {data.map((comment) => (
+          <div key={comment._id} className="comment">
+            <IKImage
+              src={comment?.user.profilePicture || "/general/noAvatar.png"}
+              alt="userImg"
+            />
+            <div className="commentContent">
+              <p className="commentText">
+                <b className="commentUser">{comment?.user.name} : </b>
+                {comment?.description}
+              </p>
+              <i className="commentDate">{format(comment.createdAt)}</i>
+            </div>
           </div>
-        </div>
-        <div className="comment">
-          <IKImage src="/general/noAvatar.png" alt="userImg" />
-          <div className="commentContent">
-            <p className="commentText">
-              <b className="commentUser">John Doe : </b>
-              This is a sample comment text. It can be quite long, so it should
-              wrap properly within the comment box.
-            </p>
-            <i className="commentDate">2 hour ago</i>
-          </div>
-        </div>
-        <div className="comment">
-          <IKImage src="/general/noAvatar.png" alt="userImg" />
-          <div className="commentContent">
-            <p className="commentText">
-              <b className="commentUser">John Doe : </b>
-              This is a sample comment text. It can be quite long, so it should
-              wrap properly within the comment box.
-            </p>
-            <i className="commentDate">2 hour ago</i>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Comment Input Form */}
-      <form className="commentForm">
-        <input type="text" placeholder="Add a comment..." />
-        <div className="emoji">
-          <span
-            onClick={() => setOpen((prev) => !prev)}
-            role="img"
-            aria-label="emoji"
-          >
-            😊
-          </span>
-
-          {open && (
-            <div className="emojiPicker">
-              <EmojiPicker
-                onEmojiClick={(event, emojiObject) => {
-                  console.log(emojiObject);
-                }}
-                disableSearchBar={true}
-                disableSkinTonePicker={true}
-              />
-            </div>
-          )}
-        </div>
-      </form>
+      <CommentForm />
     </div>
   );
 };
