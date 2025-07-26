@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import Comment from "../models/comment.model.js";
 
 export const getComments = async (req, res) => {
@@ -19,4 +20,23 @@ export const getPinComments = async (req, res) => {
     });
 
   res.status(200).json(comments);
+};
+
+export const addComment = async (req, res) => {
+  const { pin, description } = req.body;
+  const userId = req.userId;
+
+  try {
+    const comment = await Comment.create({
+      user: userId,
+      pin,
+      description,
+    });
+
+    // await comment.populate("user", "name username profilePicture");
+
+    res.status(200).json(comment);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to create comment" });
+  }
 };

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 import userRoutes from "./routes/user.route.js";
@@ -12,6 +13,7 @@ import connectDB from "./utils/connectDB.js";
 const port = process.env.PORT || 8080;
 
 // Middleware to parse JSON bodies
+
 app.use(express.json());
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -19,6 +21,7 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 // User routes
 app.use("/api/users", userRoutes);
